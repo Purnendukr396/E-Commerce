@@ -2,10 +2,14 @@ import { useParams } from "react-router-dom";
 import { products } from "../assets/Homeproduct";
 import "./ProductDetails.css";
 import Footer from '../components/Footer'
+import { useEffect } from "react";
 
 
 const ProductDetails = () => {
   const { id } = useParams();
+   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const product = products.find(
     (item) => item.id === Number(id)

@@ -1,9 +1,10 @@
 import React from 'react'
+import Collectionsidebar from '../components/Collectionsidebar'
 
 const Collection = () => {
   return (
     <div>
-      <h1>Helo this collectionpage '</h1>
+      <Collectionsidebar></Collectionsidebar>
       
     </div>
   )
