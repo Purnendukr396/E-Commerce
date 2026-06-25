@@ -14,6 +14,8 @@ import PlaceOrder from './pages/PlaceOrder'
 import Cart from './pages/Cart'
 import Navbar from './components/Navbar'
 import ProductDetails from "./pages/ProductDetails";
+import Cproductdetails from "./pages/Cproductdetails";
+
 
 
 
@@ -34,6 +36,7 @@ const App = () => {
 <Route path='/place-order' element={<PlaceOrder />} />
 <Route path='/orders' element={<Orders />} />
 <Route path="/productdetails/:id" element={<ProductDetails />} />
+<Route path="/Cproductdetails/:id" element={<Cproductdetails />} />
 
 
       </Routes>
