@@ -3,10 +3,15 @@ import { products } from "../assets/assets";
 import "./Cproductdetails.css";
 import Footer from '../components/Footer'
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 
 
 const Cproductdetails = () => {
+  const navigate = useNavigate();
+
   const { id } = useParams();
    useEffect(() => {
     window.scrollTo(0, 0);
@@ -20,6 +25,10 @@ const product = products.find( (item) => item._id === id );
 
   console.log(product);
 console.log(product.sizes);
+
+const { addToCart } = useContext(CartContext);
+
+
   
 
   return (
@@ -42,13 +51,15 @@ console.log(product.sizes);
   ))}
 </div>
 
-<h1>TEST</h1>
+
         
 
 
         <p>{product.description}</p>
 
-        <button className="add">Add to Cart</button>
+        <button className="add" onClick={() => addToCart(product)} >
+  Add to Cart
+</button>
       </div>
     </div>
     <Footer></Footer>

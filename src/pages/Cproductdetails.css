@@ -42,7 +42,7 @@
 .sizess{
     display:flex;
     gap:20px;
-    border:2px solid red;
+   
 }
 .sizess button{
     width:50px;

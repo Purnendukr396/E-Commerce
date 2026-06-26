@@ -3,10 +3,17 @@ import React, { useState } from 'react';
 import './navbar.css';
 import { assets } from '../assets/assets';
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Navbar = () => {
 
+
   const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
+
+  const { cart } = useContext(CartContext);
 
   return (
     <>
@@ -44,12 +51,17 @@ const Navbar = () => {
             </div>
 
           </div>
-
-          <img
-            className="cart-logo"
-            src={assets.cart_icon}
-            alt="cart"
+          <div>
+            <span>{cart.length}</span>
+        <img
+        className="cart-logo"
+        src={assets.cart_icon}
+        alt="Cart"
+        onClick={() => navigate("/cart")}
+        
           />
+          </div>
+         
 
           <img
             className="menu-icon"

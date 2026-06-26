@@ -15,6 +15,7 @@ import Cart from './pages/Cart'
 import Navbar from './components/Navbar'
 import ProductDetails from "./pages/ProductDetails";
 import Cproductdetails from "./pages/Cproductdetails";
+import CartProvider from "./context/CartContext";
 
 
 
@@ -24,7 +25,9 @@ import Cproductdetails from "./pages/Cproductdetails";
 const App = () => {
   return (
     <div className='container'>
-      <Navbar></Navbar>
+      
+      <CartProvider>
+        <Navbar></Navbar>
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/collection' element={<Collection />} />
@@ -39,7 +42,9 @@ const App = () => {
 <Route path="/Cproductdetails/:id" element={<Cproductdetails />} />
 
 
+
       </Routes>
+      </CartProvider>
       
     </div>
   )
