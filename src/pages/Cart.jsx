@@ -1,8 +1,15 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import "./Cart.css";
+const IMAGE_BASE_URL = "http://localhost:5000/uploads";
+import LoginPopup from "../components/LoginPopup";
+import { useNavigate } from "react-router-dom";
+
+
 
 function Cart() {
+
+  const navigate = useNavigate();
   const {
     cart,
     increaseQuantity,
@@ -10,10 +17,26 @@ function Cart() {
     removeFromCart,
   } = useContext(CartContext);
 
+  const token = localStorage.getItem("token");
+
+const isLoggedIn = token !== null;
+  const handleCheckout = () => {
+   console.log("Button clicked");
+  if (!isLoggedIn) {
+    showLoginPopup();
+    return;
+  }
+
+  navigate("/place-order");
+};
+
   const subtotal = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  const { showLoginPopup } = LoginPopup();
+
 
   return (
     <div className="cart">
@@ -29,7 +52,7 @@ function Cart() {
             <div className="cart-left">
 
               <img
-                src={product.image[0]}
+                src={`${IMAGE_BASE_URL}/${product.image?.[0]}`}
                 alt={product.name}
               />
 
@@ -97,9 +120,14 @@ function Cart() {
               <strong>${subtotal + 10}</strong>
             </div>
 
-            <button className="checkout-btn">
-              PROCEED TO CHECKOUT
-            </button>
+           
+            
+            <button
+  className="checkout-btn"
+  onClick={handleCheckout}
+>
+  PROCEED TO CHECKOUT
+</button>
 
           </div>
 

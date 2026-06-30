@@ -51,7 +51,7 @@ const Navbar = () => {
             </div>
 
           </div>
-          <div>
+          <div className="cartcount">
             <span>{cart.length}</span>
         <img
         className="cart-logo"

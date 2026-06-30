@@ -1,73 +1,62 @@
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { products } from "../assets/assets";
-import "./Cproductdetails.css";
-import Footer from '../components/Footer'
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import axios from "axios";
+import Footer from "../components/Footer";
 import { CartContext } from "../context/CartContext";
 
-
+const IMAGE_BASE_URL = "http://localhost:5000/uploads";
 
 const Cproductdetails = () => {
-  const navigate = useNavigate();
-
   const { id } = useParams();
-   useEffect(() => {
+  const { addToCart } = useContext(CartContext);
+
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
 
-const product = products.find( (item) => item._id === id );
+    axios.get(`http://localhost:5000/api/products`)
+      .then((res) => {
+        const found = res.data.products.find((p) => p._id === id);
+        setProduct(found);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
 
-  if (!product) {
-    return <h1>Product Not Found</h1>;
-  }
+  if (!product) return <h1>Loading...</h1>;
 
-  console.log(product);
-console.log(product.sizes);
-
-const { addToCart } = useContext(CartContext);
-
-
-  
-
-  return (
-    <>
+return (
+  <>
     <div className="product-details">
+
       <div className="product-image">
-        <img src={product.image[0]} alt={product.name} />
+        <img
+  src={`http://localhost:5000/uploads/${product.image[0]}`}
+  alt={product.name}
+/>
       </div>
 
       <div className="product-info">
         <h1>{product.name}</h1>
         <h2>${product.price}</h2>
         <p>{product.description}</p>
+
         <p>Select Size</p>
         <div className="sizess">
-  {product.sizes.map((size) => (
-    <button key={size}>
-      {size}
-    </button>
-  ))}
-</div>
+          {product.sizes?.map((size) => (
+            <button key={size}>{size}</button>
+          ))}
+        </div>
 
-
-        
-
-
-        <p>{product.description}</p>
-
-        <button className="add" onClick={() => addToCart(product)} >
-  Add to Cart
-</button>
+        <button className="add" onClick={() => addToCart(product)}>
+          Add to Cart
+        </button>
       </div>
     </div>
-    <Footer></Footer>
-    </>
-    
 
-  );
-};
-
+    <Footer />
+  </>
+);
+}
 
 export default Cproductdetails;

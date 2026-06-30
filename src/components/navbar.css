@@ -58,7 +58,10 @@
     min-width:130px;
     z-index:100;
 }
-
+.cartcount span{
+    color:red;
+    
+}
 .dropdown p{
     padding:10px;
     cursor:pointer;

@@ -16,6 +16,7 @@ import Navbar from './components/Navbar'
 import ProductDetails from "./pages/ProductDetails";
 import Cproductdetails from "./pages/Cproductdetails";
 import CartProvider from "./context/CartContext";
+import Register from './pages/Register'
 
 
 
@@ -40,6 +41,7 @@ const App = () => {
 <Route path='/orders' element={<Orders />} />
 <Route path="/productdetails/:id" element={<ProductDetails />} />
 <Route path="/Cproductdetails/:id" element={<Cproductdetails />} />
+<Route path="/register" element={<Register />} />
 
 
 

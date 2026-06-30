@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import "./Login.css";
+import "./Register.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Login() {
+function Register() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -19,37 +20,27 @@ function Login() {
     });
   };
 
-  // Handle login
-  const handleLogin = async (e) => {
+  // Handle form submission
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/login",
+        "http://localhost:5000/api/users/register",
         formData
       );
 
-      localStorage.setItem("token", response.data.token);
-
-    // Save logged-in user
-    localStorage.setItem(
-      "user",
-      JSON.stringify(response.data.user)
-    );
-
       alert(response.data.message);
-
-      // Save user or token if your backend returns it
-      // localStorage.setItem("token", response.data.token);
 
       // Clear the form
       setFormData({
+        name: "",
         email: "",
         password: "",
       });
 
-      // Redirect to home page
-      navigate("/");
+      // Redirect to login page
+      navigate("/login");
 
     } catch (error) {
       alert(error.response?.data?.message || "Something went wrong");
@@ -57,9 +48,18 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <form className="login-box" onSubmit={handleLogin}>
-        <h1>Login</h1>
+    <div className="register-container">
+      <form className="register-box" onSubmit={handleRegister}>
+        <h1>Create Account</h1>
+
+        <input
+          type="text"
+          placeholder="Full Name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
 
         <input
           type="email"
@@ -79,30 +79,20 @@ function Login() {
           required
         />
 
-        <button className="login-btn" type="submit">
-          Login
+        <button className="register-btn" type="submit">
+          Create Account
         </button>
 
-        <div className="login-links">
-          <button
-            type="button"
-            className="link-btn"
-            onClick={() => navigate("/forgot-password")}
-          >
-            Forgot Password?
-          </button>
-
-          <button
-            type="button"
-            className="link-btn"
-            onClick={() => navigate("/register")}
-          >
-            Create Account
-          </button>
-        </div>
+        <button
+          type="button"
+          className="back-btn"
+          onClick={() => navigate("/login")}
+        >
+          Back to Login
+        </button>
       </form>
     </div>
   );
 }
 
-export default Login;
+export default Register;

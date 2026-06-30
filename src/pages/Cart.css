@@ -66,7 +66,59 @@
     border:1px solid #ddd;
     font-size:18px;
 }
+ .qty{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
 
+.qty button{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    background:#111;
+    color:#fff;
+    font-size:24px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+.qty button:hover{
+    background:#333;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(0,0,0,0.2);
+}
+
+.qty span{
+    min-width:35px;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
+    color:#333;
+}
+
+.delete button{
+    width:110px;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    background:#e53935;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 4px 12px rgba(229,57,53,0.25);
+}
+
+.delete button:hover{
+    background:#c62828;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(229,57,53,0.35);
+}
 .delete img{
     width:22px;
     cursor:pointer;
